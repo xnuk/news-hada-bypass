@@ -1,0 +1,12 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"extends": "@xnuk/tsconfig/base.json",
+	"compilerOptions": {
+		"lib": ["esnext"],
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"types": ["@cloudflare/workers-types"],
+
+		"noEmit": true
+	}
+}

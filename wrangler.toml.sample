@@ -1,0 +1,14 @@
+# vim: ft=toml
+name = "aaaaaaaaaaaa"
+main = "src/index.ts"
+compatibility_date = "2023-03-24"
+
+workers_dev = true
+minify = true
+node_compat = false
+send_metrics = false
+
+[[kv_namespaces]]
+binding = "HADA"
+id = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+preview_id = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
