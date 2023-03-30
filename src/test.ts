@@ -1,9 +1,6 @@
-import { KeyValue, makeResponse } from './index.ts'
+import { keyValue, makeResponse } from './index.ts'
 
-const keyValueTest: KeyValue = {
-	get: () => Promise.resolve(null),
-	set: () => null,
-}
+const keyValueTest = keyValue(null)
 
 const get = (entry: string) =>
 	makeResponse(

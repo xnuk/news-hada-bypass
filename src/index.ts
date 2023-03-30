@@ -1,5 +1,5 @@
 export interface Env {
-	HADA: KVNamespace
+	HADA?: KVNamespace
 }
 
 const hada = 'https://news.hada.io/topic?id='
@@ -57,7 +57,14 @@ const getPost = async (url: string, map: KeyValue | null): Promise<string> => {
 	return redirect
 }
 
-const keyValue = (kv: KVNamespace): KeyValue => {
+export const keyValue = (kv: KVNamespace | null | undefined): KeyValue => {
+	if (kv == null) {
+		return {
+			get: () => Promise.resolve(null),
+			set: () => null,
+		}
+	}
+
 	const set: KeyValue['set'] = (key, value) =>
 		kv
 			.put(key, value, { expirationTtl: 2592000 /* 30 days */ })
