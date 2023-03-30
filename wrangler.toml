@@ -1,5 +1,4 @@
-# vim: ft=toml
-name = "aaaaaaaaaaaa"
+name = "news-hada"
 main = "src/index.ts"
 compatibility_date = "2023-03-24"
 
@@ -10,5 +9,3 @@ send_metrics = false
 
 [[kv_namespaces]]
 binding = "HADA"
-id = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-preview_id = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
