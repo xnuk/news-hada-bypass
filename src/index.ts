@@ -33,7 +33,7 @@ const getPostId = (url: string): `${number}` | null => {
 
 export interface KeyValue {
 	get(key: string): Promise<string | null>
-	set(key: string, value: string): any
+	set(key: string, value: string): Promise<any>
 }
 
 const getPost = async (url: string, map: KeyValue | null): Promise<string> => {
@@ -53,7 +53,7 @@ const getPost = async (url: string, map: KeyValue | null): Promise<string> => {
 
 	if (redirect == null) return Promise.reject()
 
-	if (map != null) map.set(id, redirect)
+	if (map != null) await map.set(id, redirect).catch(() => {})
 	return redirect
 }
 
@@ -61,14 +61,12 @@ export const keyValue = (kv: KVNamespace | null | undefined): KeyValue => {
 	if (kv == null) {
 		return {
 			get: () => Promise.resolve(null),
-			set: () => null,
+			set: () => Promise.resolve(null),
 		}
 	}
 
 	const set: KeyValue['set'] = (key, value) =>
-		kv
-			.put(key, value, { expirationTtl: 2592000 /* 30 days */ })
-			.catch(() => {})
+		kv.put(key, value, { expirationTtl: 2592000 /* 30 days */ })
 	const get: KeyValue['get'] = async key => {
 		const val = await kv.get(key)
 		if (val != null) set(key, val)
