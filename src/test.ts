@@ -31,3 +31,11 @@ Test('normal redirect', async () => {
 Test('self redirect', async () => {
 	await get('/1').then(equal('https://news.hada.io/topic?id=1'))
 })
+
+Test('&amp; control', async () => {
+	await get('/9872').then(
+		equal(
+			'https://treeherder.mozilla.org/perfherder/graphs?timerange=31536000&series=mozilla-central,3735773,1,13&series=mozilla-central,3412459,1,13',
+		),
+	)
+})

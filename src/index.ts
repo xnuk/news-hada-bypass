@@ -4,6 +4,15 @@ export interface Env {
 
 const hada = 'https://news.hada.io/topic?id='
 
+const decodeMap = {
+	amp: '&',
+	lt: '<',
+	gt: '>',
+	quot: '"',
+	'#x27': "'",
+	'#x60': '`',
+} as const
+
 const processHada = (body: string): string | null => {
 	let a = body.split("<div class='topictitle link'><a href='")[1]
 	if (a == null) return null
@@ -11,7 +20,10 @@ const processHada = (body: string): string | null => {
 	if (a == null) return null
 
 	try {
-		return new URL(a, 'https://news.hada.io/').href
+		return new URL(
+			a.replace(/&(lt|gt|quot|#x27|#x60|amp);/g, (_, p) => decodeMap[p]),
+			'https://news.hada.io/',
+		).href
 	} catch (_) {
 		return null
 	}
